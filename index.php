@@ -309,7 +309,7 @@
 //         }
 
 //         $str = rtrim($str, " , ");
-    
+
 //         $query = "UPDATE `user` SET $str WHERE id = 22";
 //         mysqli_query($this->connection, $query);
 //     }
@@ -449,9 +449,9 @@
 
 // task for method chaining in db.php file
 
-require "db.php";
+// require "db.php";
 
-$db = new db("localhost", "root", "", "test", "user");
+// $db = new db("localhost", "root", "", "test", "user");
 // $db->insert([
 //     "name" => "ahmed",
 //     "email" => "ahmed@gmail",
@@ -474,3 +474,206 @@ $db = new db("localhost", "root", "", "test", "user");
 
 // $db->delete()->where("id", "=", "24")->excute();
 
+//////////////////////////////////////////////////
+
+// Multi Inheritance with Trait
+
+// trait a{
+//     public function testa(){
+//         echo "testa";
+//     }
+// }
+
+// trait b{
+//     public function testb(){
+//         echo "testb";
+//     }
+// }
+
+// class c{
+//     use a,b;
+//     public function testc(){
+//         echo "testc";
+//     }
+// }
+
+// $c = new c();
+// $c->testa(); // testa
+// echo "<br>";
+// $c->testb(); // testb
+// echo "<br>";
+// $c->testc(); // testc
+
+/////////////////////////////////////////
+
+// if we have 2 trait and we have same method name in both trait
+
+// trait a{
+//     public function test(){
+//         echo "testa";
+//     }
+// }
+
+// trait b{
+//     public function test(){
+//         echo "testb";
+//     }
+// }    
+
+// class c{
+//     use a,b {
+//         a::test insteadof b;
+//         b::test as testb;
+//     }
+// }
+
+// $c = new c();
+// $c->test(); // testa
+// $c->testb(); // testb
+
+////////////////////////////////////////////////
+
+// override
+
+// class a {
+//     public function test(){
+//         echo "testa";
+//     }
+// }
+
+// class b extends a {
+//     public function test(){
+//         echo "testb";
+//     }
+// }
+
+// $b = new b();
+// $b->test(); // testb
+
+///////////////////////////////////////////
+
+// final  => we can't overide from final class
+
+//  class a {
+//     final public function test(){
+//         echo "testa";
+//     }
+// }
+
+// class b extends a {
+
+// }
+
+// $b = new b();
+// $b->test(); // testa
+
+////////////////////////////////////////////
+
+// overloading => 2 same method name in class
+// one => without parameter
+// two => with parameter
+
+// class user {
+//     public function __call($name, $arguments)
+//     {
+//         echo $name . "<br>";
+//     }
+// }
+
+// $user = new user();
+// $user->test(); // test
+
+/////////////////
+
+// class user {
+//     public function __call($name, $arguments)
+//     {
+//         echo $name . "<br>";
+//         echo $arguments[0];
+//     }
+// }
+
+// $user = new user();
+// $user->test("hello"); // test hello
+
+////////////////////
+
+// we solve this problem overloading by __call
+
+// class user
+// {
+//     public function __call($name, $arguments)
+//     {
+//         if ($name == "add") {
+//             if (count($arguments) == 2) {
+//                 echo $arguments[0] + $arguments[1];
+//             } else if (count($arguments) > 2) {
+//                 echo $arguments[0] + $arguments[1] + $arguments[2];
+//             }
+//         }
+//     }
+// }
+
+// $user = new user();
+// $user->add(1, 2); // 3
+// $user->add(1, 2, 3); // 6
+
+///////////////////////////////////////////////////
+
+// static property
+
+// class user {
+//     public static $name = "ahmed";
+//     public static function test(){
+//         echo self::$name;
+//     }
+// }
+
+// echo user::$name; // ahmed
+// user::test(); // ahmed
+
+
+///////////////////////////////////////////////////
+
+// static method   
+
+// class user {
+//     public static function test(){
+//         echo "test";
+//     }
+// }
+
+// user::test(); // test
+
+/////////////////////////////////////////////////
+
+// Autoload
+
+// spl_autoload_register(function ($class) {
+//     if (file_exists("controller/" . $class . ".php")) {
+//         include "controller/" . $class . ".php";
+//     }else if (file_exists("model/" . $class . ".php")) {
+//         include "model/" . $class . ".php";
+//     }
+
+//     // include $class . ".php";
+// });
+
+// $user = new user();
+// $user->test();
+// echo "<br>";
+// $category = new category();
+// $category->cat();
+
+/////////////////////////////////////////////////
+
+// namespace
+
+// use controller\category;
+// use model\category;
+
+// include "controller/category.php";
+// include "model/category.php";
+
+// $c = new category();
+// $c->cat();
